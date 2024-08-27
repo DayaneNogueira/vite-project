@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Lists from './components/Lists'
 import Video from './components/Video'
-import Forms from './components/Forms'
+import Form from './components/Form'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -37,7 +37,7 @@ function App() {
       <main>
         <Lists titulo='Minha tela exemplo'/>
         <Video />
-        <Forms />
+        <Form />
       </main>
       <Footer/>
     </>
