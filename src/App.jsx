@@ -7,6 +7,8 @@ import Header from './components/Header'
 import Lists from './components/Lists'
 import Video from './components/Video'
 import Form from './components/Form'
+import Home from './pages/Home'
+import ApiRickAndMorty from './pages/ApiRickAndMorty'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -34,9 +36,14 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <Header/>
+      <Routes>
+        <Route path='/' element={<ApiRickAndMorty/>} />
+        <Route path='/about' element={<ApiRickAndMorty/>} />
+      </Routes>
       <main>
         <Lists titulo='Minha tela exemplo'/>
         <Video />
+        <About />
         <Form />
       </main>
       <Footer/>

@@ -5,6 +5,8 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <BrouserRouter>
     <App />
+    </BrouserRouter>
   </StrictMode>,
 )
