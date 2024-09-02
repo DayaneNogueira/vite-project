@@ -4,10 +4,6 @@ import Card from '../../components/Card'
 import Filter from '../../components/Filter'
 import Pagination from '../../components/Pagination'
 
-const mockResult = [
-
-]
-
 export default function RickAndMortyApi() {
   const [ conteudo, setConteudo ] = useState(<>Carregando</>)
   const [ busca, setBusca ] = useState('');
@@ -15,34 +11,32 @@ export default function RickAndMortyApi() {
   const [totalPages, setTotalPages] = useState(1);
 
   async function carregarTodosPersonagens() {
-    //carregar todos os personagens da AP do rick - com fetch
     var requestOptions = {
       method: 'GET',
-      redirect: 'follow',
-      return { info: {}, results: mockResult}
+      redirect: 'follow'
     };
     
-    const result = await fetch(
+    const response = await fetch(
       `https://rickandmortyapi.com/api/character?page=${page}${busca}`,
       requestOptions
     )
-      .then(response => response.text())
-      .then(result => { return result })
-      .catch(error => console.log('error', error));
-    const response = JSON.parse(result)
 
-    return { info: response.info, char: response.results, }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+  
+    return { info: data.info, char: data.results, }
   }
 
   async function listaPersonagens() {
     const { char: todosPersonagens, info } = await carregarTodosPersonagens()
     setTotalPages(info.pages)
 
-    return todosPersonagens.map(personagem => 
-        <Card 
-            key={personagem}
-            data={personagem} />
-    )   
+    return todosPersonagens.map(personagem =>
+      <Card data={personagem} />
+    )
   }
 
   useEffect(() => {
